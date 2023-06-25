@@ -5,7 +5,22 @@
 # uniquepass: Utility to generate a Random passwd 
 #             using GPG             
 ##########################################################
-echo " :: uniquepass :: "
-echo "Enter length of required password"
-read PASSLENGTH
-gpg --gen-random --armor 2 $PASSLENGTH
+# Check if GPG is installed
+if ! command -v gpg &>/dev/null; then
+  echo "GPG is not installed. Installing GPG..."
+  if [[ -f /etc/redhat-release ]]; then
+    sudo yum install -y gpg
+  else
+    echo "Unsupported operating system. Please install GPG manually."
+    exit 1
+  fi
+fi
+
+# Prompt for password length
+read -p "Enter the desired length of the password: " pass_length
+
+# Generate random password using GPG
+random_password=$(gpg --gen-random --armor 2 "$pass_length")
+
+echo "Random Password:"
+echo "$random_password"
