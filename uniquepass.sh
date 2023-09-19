@@ -1,9 +1,8 @@
 #!/bin/bash -
-###########################################################
 # Author:     Christo Deale                  
 # Date  :     2023-06-21             
 # uniquepass: Utility to generate a Random passwd using GPG             
-###########################################################
+
 # Check if GPG is installed
 if ! command -v gpg &>/dev/null; then
   echo "GPG is not installed. Installing GPG..."
